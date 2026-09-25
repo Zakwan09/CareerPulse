@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Register</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="dot"></span>
+        <div>
+          <h1>CareerPulse</h1>
+          <span>Job Market &amp; Skill Intelligence</span>
+        </div>
+      </div>
+
+      <form id="register-form">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" required minlength="8" autocomplete="new-password" />
+        </div>
+        <div class="field">
+          <label for="confirm_password">Confirm password</label>
+          <input type="password" id="confirm_password" required minlength="8" autocomplete="new-password" />
+        </div>
+        <button class="btn" type="submit" id="register-btn">Create account</button>
+        <div id="register-msg"></div>
+      </form>
+
+      <div class="hint">Already have an account? <a href="/login">Log in</a></div>
+    </div>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script>
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("register-btn");
+      const msg = document.getElementById("register-msg");
+      msg.innerHTML = "";
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm_password = document.getElementById("confirm_password").value;
+
+      if (password !== confirm_password) {
+        msg.innerHTML = `<div class="msg error">Passwords do not match.</div>`;
+        return;
+      }
+      if (password.length < 8) {
+        msg.innerHTML = `<div class="msg error">Password must be at least 8 characters.</div>`;
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Creating account...";
+      try {
+        await apiFetch("/api/auth/register", {
+          method: "POST",
+          body: JSON.stringify({ name, email, password, confirm_password }),
+        });
+        msg.innerHTML = `<div class="msg success">Account created! Redirecting to login...</div>`;
+        setTimeout(() => (window.location.href = "/login"), 900);
+      } catch (err) {
+        msg.innerHTML = `<div class="msg error">${err.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Create account";
+      }
+    });
+  </script>
+</body>
+</html>

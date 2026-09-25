@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Login</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="dot"></span>
+        <div>
+          <h1>CareerPulse</h1>
+          <span>Job Market &amp; Skill Intelligence</span>
+        </div>
+      </div>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" required autocomplete="current-password" />
+        </div>
+        <button class="btn" type="submit" id="login-btn">Log In</button>
+        <div id="login-msg"></div>
+      </form>
+
+      <div class="hint">Don't have an account? <a href="/register">Register</a></div>
+    </div>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("login-btn");
+      const msg = document.getElementById("login-msg");
+      msg.innerHTML = "";
+      btn.disabled = true;
+      btn.textContent = "Logging in...";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const data = await apiFetch("/api/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+        });
+        setToken(data.access_token);
+        window.location.href = "/dashboard";
+      } catch (err) {
+        msg.innerHTML = `<div class="msg error">${err.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Log In";
+      }
+    });
+
+    // If already logged in, skip straight to dashboard.
+    if (getToken()) window.location.href = "/dashboard";
+  </script>
+</body>
+</html>

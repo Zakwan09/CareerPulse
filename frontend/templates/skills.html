@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Skills</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    {% include "_sidebar.html" %}
+    <main class="main">
+      <div class="page-header">
+        <h2>Skill Intelligence</h2>
+        <p>Demand, salary association, and related skills — all computed from the dataset.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Top Skills</h3>
+          <div id="skills-list"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="card">
+          <h3>Skill Detail</h3>
+          <div class="filters" style="margin-bottom:14px;">
+            <select id="skill-select"><option value="">Select a skill...</option></select>
+          </div>
+          <div id="skill-detail"><div class="empty-state">Select a skill to see details.</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/skills.js"></script>
+</body>
+</html>

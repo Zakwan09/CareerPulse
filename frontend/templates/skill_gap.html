@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Skill Gap</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    {% include "_sidebar.html" %}
+
+    <main class="main">
+
+      <div class="page-header">
+        <h2>Skill Gap Analysis</h2>
+        <p>
+          Compare your skills against what the market actually requires
+          for a target role.
+        </p>
+      </div>
+
+      <!-- INPUT CARD -->
+      <div class="card" style="margin-bottom:20px;">
+
+        <!-- Target Role -->
+        <div class="field">
+          <label for="target-role">Target Role</label>
+
+          <select id="target-role">
+            <option value="">Select a role...</option>
+          </select>
+        </div>
+
+        <!-- Resume Upload -->
+        <div class="field">
+          <label for="resume-file">Upload Resume</label>
+
+          <input
+            type="file"
+            id="resume-file"
+            accept=".pdf,.docx"
+          />
+
+          <small
+            style="
+              display:block;
+              margin-top:6px;
+              color:var(--cp-text-dim);
+            "
+          >
+            Supported format: PDF or DOCX
+          </small>
+
+          <div
+            id="resume-name"
+            style="
+              margin-top:8px;
+              font-size:13px;
+              color:var(--cp-text-dim);
+            "
+          ></div>
+        </div>
+
+        <!-- Manual Skills -->
+        <div class="field">
+          <label for="skill-tag-input">
+            Your Current Skills
+            <span style="font-weight:normal;color:var(--cp-text-dim);">
+              (Optional)
+            </span>
+          </label>
+
+          <div class="tag-input-wrap" id="tag-wrap">
+            <input
+              id="skill-tag-input"
+              placeholder="Type a skill and press Enter (e.g. Python)"
+            />
+          </div>
+
+          <small
+            style="
+              display:block;
+              margin-top:6px;
+              color:var(--cp-text-dim);
+            "
+          >
+            Skills extracted from your resume will be added automatically.
+          </small>
+        </div>
+
+        <button
+          class="btn"
+          style="width:auto;"
+          id="analyze-btn"
+          type="button"
+        >
+          Analyze Skill Gap
+        </button>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div id="gap-results"></div>
+
+    </main>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/skill_gap.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Market Intelligence</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    {% include "_sidebar.html" %}
+    <main class="main">
+      <div class="page-header">
+        <h2>Market Intelligence</h2>
+        <p>Filter the live job dataset to explore demand, salary and skills.</p>
+      </div>
+
+      <div class="filters">
+        <select id="f-role"><option value="">All Roles</option></select>
+        <select id="f-location"><option value="">All Locations</option></select>
+        <input id="f-industry" placeholder="Industry" />
+        <select id="f-work-mode">
+          <option value="">All Work Modes</option>
+          <option>Onsite</option><option>Remote</option><option>Hybrid</option>
+        </select>
+        <select id="f-employment-type">
+          <option value="">All Employment Types</option>
+          <option>Full-time</option><option>Contract</option><option>Internship</option>
+        </select>
+        <button class="btn" style="width:auto;" id="apply-filters">Apply</button>
+      </div>
+
+      <div id="market-results">
+        <div class="loading">Loading...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/market.js"></script>
+</body>
+</html>

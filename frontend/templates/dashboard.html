@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerPulse — Dashboard</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    {% include "_sidebar.html" %}
+    <main class="main">
+      <div class="page-header">
+        <h2>Dashboard</h2>
+        <p>Live snapshot of the job market, computed from the current dataset.</p>
+      </div>
+
+      <div id="kpi-grid" class="grid grid-4" style="margin-bottom:20px;">
+        <div class="loading">Loading dashboard...</div>
+      </div>
+
+      <div class="grid grid-2" style="margin-bottom:16px;">
+        <div class="card">
+          <h3>Jobs by Role</h3>
+          <canvas id="chart-role" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Jobs by Location</h3>
+          <canvas id="chart-location" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Salary Distribution (LPA)</h3>
+          <canvas id="chart-salary" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Top Skills</h3>
+          <div id="top-skills"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
