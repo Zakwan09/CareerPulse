@@ -145,9 +145,3 @@ POST /api/ml/predict-salary | POST /api/ml/classify-role
 GET  /api/forecast/{skill_name}
 POST /api/skill-gap/analyze
 ```
-
-## Regenerating the demo dataset
-
-`scripts/generate_demo_data.py` is a one-off script (not part of the
-runtime pipeline) that produced `data/raw/jobs_demo.csv`. Re-run it if you
-want a fresh random synthetic set (seeded, so it's reproducible by default).
